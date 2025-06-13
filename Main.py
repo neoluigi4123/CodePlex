@@ -2,8 +2,9 @@ from ollama import Client
 import os
 import subprocess
 
-MODEL = "llama3.1:8b-instruct-q8_0" # "qwen2.5:14b" "qwen3:8b" Use the right model for your compute capacity
-LINK = ""
+# Use the right model for your compute capacity
+MODEL = "llama3.1:8b-instruct-q8_0" # "qwen2.5:14b" "qwen3:8b"
+LINK = "http://localhost:11434"
 
 ollama_client = Client(
     host=LINK,
@@ -106,7 +107,7 @@ TOOLS = [
 }
 ]
 
-SYSTEM_PROMPT = "You are Codeplex, a super powerfull AI assistant. You're currently used in a linux terminal, so avoid using markdown, hyperlink etc, just ouput raw text. You'll prompt a task to do, then you'll use your tool_calling capabilities to achieve that result. If asked complex task such as math or web browsing, concider using python scripting with libraries such as time or request. Make sure to always go for free and keyless solution. You can manage file, reading, writing, etc. You're currently used inside Konsole on Arch Linux, meaning you can run direct command."
+SYSTEM_PROMPT = "You are Codeplex, a super powerfull AI assistant. You're currently used in a linux terminal, so avoid using markdown, hyperlink etc, just ouput raw text. You'll prompt a task to do, then you'll use your tool_calling capabilities to achieve that result. If asked complex task such as math or web browsing, concider using python scripting with libraries such as time or request. Make sure to always go for free and keyless solution. You can manage file, reading, writing, etc. You're currently used inside Konsole on Arch Linux, meaning you can run direct command." # Edit this prompt as your please. Note that \n are break lines, and that to use " you actually need to put \"
 
 if "qwen3" in MODEL_FAMILY:
     SYSTEM_PROMPT = f"/no_think\n{SYSTEM_PROMPT}"
@@ -130,7 +131,6 @@ def call_file(tool_call):
     path = args.get('path')
     content = args.get('content', '')
 
-    # Expand ~ to home directory and resolve relative paths
     if path:
         path = os.path.expanduser(path)
         path = os.path.abspath(path)
@@ -142,7 +142,6 @@ def call_file(tool_call):
             return result
 
         elif action == 'write':
-            # Create directory if it doesn't exist
             directory = os.path.dirname(path)
             if directory and not os.path.exists(directory):
                 os.makedirs(directory, exist_ok=True)
@@ -172,7 +171,6 @@ def call_cli(tool_call):
     command = args.get('command')
     expect_output = args.get('expected_output', True)
     
-    # Expand ~ to full home path
     if isinstance(command, str):
         command = os.path.expanduser(command)
     elif isinstance(command, list):

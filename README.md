@@ -1,7 +1,13 @@
-# CodePlex ⚙️
+# CodePlex V2⚙️
 Local AI Assistant with file management, python scripting, and system commands!
 
 ---
+
+## 🧤 Changelogs
+
+- Support over WSL and bash
+- Correct Google-style comments
+- Dynamic system prompt based on Os and Terminal
 
 ## 🚧 To Do
 

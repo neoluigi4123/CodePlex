@@ -15,7 +15,6 @@ Local AI Assistant with file management, python scripting, and system commands!
 - Retry N times when a tool fails
 - Fix subprocess started by the model
 - Allow argument to set default link and default model
-- Port to Windows
 
 ---
 

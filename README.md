@@ -18,6 +18,7 @@ Local AI Assistant with file management, python scripting, and system commands!
 | OS      | Supported |
 |---------|-----------|
 | Windows | ❌        |
+| WSL     | ✅        |
 | Linux   | ✅        |
 | Mac     | ❌        |
 
@@ -27,10 +28,18 @@ Local AI Assistant with file management, python scripting, and system commands!
 
 Make sure you got **Ollama** installed:
 
+**Arch:**
 ```bash
 sudo pacman -S ollama
-````
+```
+**Linux:**
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+**Windows:**
+[Ollama Download Page](https://ollama.com/download/window)
 
+---
 Launch Ollama if it's not running:
 
 ```bash
@@ -71,7 +80,9 @@ python codeplex.py
 
 If you wanna make it easier, set up an alias like:
 
+**Linux & WSL:**
 ```bash
+nano ~/.bashrc
 alias codeplex='source /path/to/venv/bin/activate && python /path/to/codeplex.py'
 ```
 
